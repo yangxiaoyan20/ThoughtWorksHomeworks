@@ -39,22 +39,26 @@ public class BowlingGame{
 
     public static int getBowlingScore(int[][] scores){
         int res=0;
-        for (int i = 0; i < scores.length-1; i++) {//前11轮
+        for (int i = 0; i < scores.length-1; i++) {
+		          //前11轮
             if (scores[i][0] == 10 && i != 9) {
-                if (scores[i + 1][0] == 10 && i < 8){ //前8轮，一次10分 就记后面2投球的分数
+                if (scores[i + 1][0] == 10 && i < 8){ 
+				     //前8轮，一次10分 就记后面2投球的分数
                     scores[i][2] = scores[i][0] + scores[i + 1][0]  + scores[i + 2][0];
-                }else if (scores[i + 1][0] != 10 || i == 8){//第9轮10分 记第10轮2次的分数
+                }else if (scores[i + 1][0] != 10 || i == 8){
+				        //第9轮10分 记第10轮2次的分数
                     scores[i][2] = scores[i][0]  + scores[i + 1][0]  + scores[i + 1][1];
                 }
             }else{              
-                if (scores[i][0] + scores[i][1] == 10 && i < 9){//前9轮 补中10分 加上下轮第一次的分数
+                if (scores[i][0] + scores[i][1] == 10 && i < 9){
+				       //前9轮 补中10分 加上下轮第一次的分数
                     scores[i][2] = scores[i][0] + scores[i][1] + scores[i + 1][0];
                 }else{
-                    scores[i][2] = scores[i][0] + scores[i][1];//2次不足10分 就记这么多
+				         //2次不足10分 就记这么多
+                    scores[i][2] = scores[i][0] + scores[i][1];
                 }
             }
         }
-        //求累计积分
         scores[0][3] = scores[0][2];
         for(int i = 1; i < scores.length;i++ ){
                 scores[i][3]=scores[i][2] + scores[i - 1][3];
